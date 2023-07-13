@@ -1,0 +1,44 @@
+{% load static %}
+{%include 'nevigation.html' %}
+{%include 'base.html' %}
+{% block content %}
+
+{% if error == "no" %}
+<script>
+    alert("Added successfully")
+    window.location = "{% url 'view_appointment' %}"
+</script>
+{% endif %}
+
+
+{% if error == "yes" %}
+<script>
+    alert("fail to add data")
+</script>
+{% endif %}
+
+<div class="container">
+    <h2 class="text">Add Appointment</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label>Doctor Name</label>
+        <select name="doctor" id="" class="form-control">
+            {% for i in doctor %}
+            <option value="{{i.name}}">{{i.name}}</option>
+            {% endfor %}
+        </select>
+        <label> Pateint Name</label>
+        <select name="patient" id="" class="form-control">
+            {% for i in patient %}
+            <option value="{{i.name}}">{{i.name}}</option>
+            {% endfor %}
+        </select>
+        <label>Date </label>
+        <input type="date" class="form-control" name="date" id="">
+        <label>Time </label>
+        <input type="time" class="form-control" name="time" id="">
+        <input type="submit" class="form-control btn btn-primary mg-5" name="" value="Add">
+    </form>
+    <!-- <script>alert("successfully login")</script> -->
+</div>{%include 'footer.html' %}
+{% endblock content %}
